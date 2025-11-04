@@ -1,0 +1,104 @@
+//Faça um programa em C onde seja informado uma quantidade N de alunos. Para cada aluno deve ser armazenado idade, nome e nota final. A instanciação do vetor...
+//...deve ser feita de forma dinamica, utilizando malloc() Memory Rellocation
+
+
+
+
+//struct armazena diversos dados relativos a uma unica coisa
+/*#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+    
+    struct ficha_aluno;//ficha de dado
+    {
+        int *arr;
+        int nota, idade;
+        char nome[40];
+    }; //definição da struct
+    
+    struct ficha_aluno aluno;
+
+    printf("\n-----------------Ficha do aluno--------------------\n\n\n");
+    
+    printf("Nome do aluno...: ");
+    fgets(aluno.nome, 40, stdin);
+
+    printf("Digite a idade do aluno: ");
+    scanf("%d", &aluno.idade);
+
+    printf("Informe a nota do aluno:");
+    scanf("%d", &aluno.nota);
+
+    aluno = (int *) malloc(n * sizeof(int));
+
+    for (int i = 0; i < n; i++){
+        aluno[i] = i;
+    }
+    for (int i = 0; i < n; i++){
+        printf("%d\n", aluno[i]);
+    }
+    free(aluno);
+
+    return 0;
+
+} 
+    Esse é o meu codigo sem saber*/
+
+
+
+//Código corrigido
+
+    #include <stdio.h>
+#include <stdlib.h>
+
+struct ficha_aluno {
+    char nome[40];
+    int idade;
+    float nota;
+};
+
+int main() {
+    int n;
+
+    printf("Digite a quantidade de alunos: ");
+    scanf("%d", &n);
+    getchar();
+
+    
+    struct ficha_aluno *alunos;
+    alunos = (struct ficha_aluno *) malloc(n * sizeof(struct ficha_aluno));
+
+    if (alunos == NULL) {
+        printf("Erro ao alocar memória!\n");
+        return 1;
+    }
+
+    
+    for (int i = 0; i < n; i++) {
+        printf("\n--- Aluno %d ---\n", i + 1);
+        printf("Nome: ");
+        fgets(alunos[i].nome, 40, stdin);
+
+        printf("Idade: ");
+        scanf("%d", &alunos[i].idade);
+
+        printf("Nota final: ");
+        scanf("%f", &alunos[i].nota);
+        getchar();
+    }
+
+    
+    printf("\n===== Lista de Alunos =====\n");
+    for (int i = 0; i < n; i++) {
+        printf("\nAluno %d\n", i + 1);
+        printf("Nome: %s", alunos[i].nome);
+        printf("Idade: %d\n", alunos[i].idade);
+        printf("Nota: %.2f\n", alunos[i].nota);
+    }
+
+    // Liberação da memória
+    free(alunos);
+
+    return 0;
+}
